@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeLeaf.org/thymeLeaf-extras-springsecurit5">
+
+<head
+	th:replace="fragments :: page_head('Category - LeLivre Online Store', 'none')" />
+
+<body style="background-color: #FF8F59;">
+	<div class="container-fluid">
+		<div th:replace="navigation :: header_menu"></div>
+
+		<div style="background-color: #FF8F59;">
+			<h2>Categories List</h2>
+			<div class="card-deck">
+				<div th:each="cat : ${listCategories}">
+
+
+					<div class="card">
+						
+							<img th:src="@{${cat.imagePath}}" style="width: 100px"
+								class="img-fluid" /> <a class="items"
+								th:href="@{'/categories/'+ ${cat.id}}"> [[${cat.name}]] </a>
+					
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div th:replace="fragments :: footer"></div>
+	</div>
+</body>
+
+</html>
+
+
+
+
+
+

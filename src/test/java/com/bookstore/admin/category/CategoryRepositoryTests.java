@@ -1,5 +1,7 @@
 package com.bookstore.admin.category;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -24,5 +26,15 @@ public class CategoryRepositoryTests {
 			System.out.println(category.getName() + "(" + category.isEnabled() + ")");
 		});
 	}
+	@Test
+	public void testfindSubCategoriesById() {
+		Integer id = 1;
+		List<Category> categories = repo.findSubCategoriesById(id);
+		categories.forEach(category -> {
+			System.out.println(category.getName() + "(" + category.isEnabled() + ")");
+		});
+		assertThat(categories).isNotNull();
+	}
+	
 
 }

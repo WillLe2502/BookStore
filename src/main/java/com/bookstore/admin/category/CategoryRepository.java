@@ -12,7 +12,9 @@ public interface CategoryRepository extends CrudRepository<Category, Integer> {
 @Query("SELECT c FROM Category c WHERE c.enabled = true")	
 public List<Category> findAllEnabled();
 
+@Query("SELECT c FROM Category c WHERE c.parent.id is NULL")
+public List<Category> findRootCategories();
 
-
-
+@Query("SELECT c FROM Category c WHERE c.parent.id = ?1")
+public List<Category> findSubCategoriesById(Integer id);
 }
