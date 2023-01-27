@@ -10,22 +10,28 @@
 	<div class="container-fluid">
 		<div th:replace="navigation :: header_menu"></div>
 
-		<div style="background-color: #FF8F59;">
+		<div class="container"
+			style="background-color: #FF8F59; text-align: center; text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4); color: black; font-size: 20px;">
+			<br>
 			<h2>Categories List</h2>
 			<div class="card-deck">
 				<div th:each="cat : ${listCategories}">
 
+					<div class="card p-3">
 
-					<div class="card">
-						
-							<img th:src="@{${cat.imagePath}}" style="width: 100px"
-								class="img-fluid" /> <a class="items"
-								th:href="@{'/categories/'+ ${cat.id}}"> [[${cat.name}]] </a>
-					
+						<img th:src="@{${cat.imagePath}}" style="width: 100px"
+							class="card-img-top" />
+							
+						<div class="card-body">
+							<a class="items" th:href="@{'/categories/'+ ${cat.alias}}" style="color: brown;">
+								[[${cat.name}]] </a>
+
+						</div>
 
 					</div>
-
+					<div>&nbsp;</div>
 				</div>
+
 			</div>
 		</div>
 		<div th:replace="fragments :: footer"></div>

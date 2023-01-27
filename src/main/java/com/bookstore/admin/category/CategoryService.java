@@ -21,5 +21,10 @@ public class CategoryService {
 
 		return repo.findSubCategoriesById(Id);
 	}
+	
+	public Category findIdByAlias (String alias) {
+		return repo.findByAlias(alias);
+	}
+	
 
 }

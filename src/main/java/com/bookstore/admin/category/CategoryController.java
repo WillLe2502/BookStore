@@ -24,9 +24,10 @@ public class CategoryController {
 		return "categories";
 	}
 	
-	@GetMapping("/categories/{category_id}")
-	public String viewSubCategory(@PathVariable("category_id") Integer id, Model model){
-		List<Category> listCategories = categoryService.getSubCategories(id);
+	@GetMapping("/categories/{category_alias}")
+	public String viewSubCategory(@PathVariable("category_alias") String alias, Model model){
+		Category category = categoryService.findIdByAlias(alias);
+		List<Category> listCategories = categoryService.getSubCategories(category.getId());
 	
 		model.addAttribute("listCategories", listCategories);
 		
