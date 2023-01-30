@@ -1,5 +1,7 @@
 package com.bookstore.admin.book;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,4 +33,10 @@ public class BookService {
 
 		return book;
 	}
-}
+	
+	public List<Book> getAllBook(){
+		List<Book> books = repo.findAllEnabled();
+		return books;
+	}
+	}
+	

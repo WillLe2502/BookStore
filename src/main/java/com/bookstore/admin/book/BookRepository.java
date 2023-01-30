@@ -1,5 +1,7 @@
 package com.bookstore.admin.book;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -13,4 +15,8 @@ public interface BookRepository extends PagingAndSortingRepository<Book, Integer
 	
 	@Query("SELECT b FROM Book b WHERE b.name = ?1")
 	public Book findByName(String name);
+	
+	@Query("SELECT b FROM Book b WHERE b.enabled = true ORDER BY b.name ASC")
+	public List<Book> findAllEnabled();
+
 }

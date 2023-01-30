@@ -3,25 +3,30 @@
 
 <head th:replace="fragments :: page_head('Category - LeLivre Online Store', 'none')" />
 
-<body>
+<body style="background-color: #FF8F59; ">
 	<div class="container-fluid">
 		<div th:replace="navigation :: header_menu"></div>
-		<hr>
-		<div class="container">
-			<div>
-				<h3 style="color: brown;">All Categories</h3>
-			</div>
 
-			<div class="row">
-				<div class="col" th:each="cat : ${listCategories}">
-					<div>
-						<a class="items" th:href="@{'/categories/'+ ${cat.alias}}">
-							<b>[[${cat.name}]]</b> </a>
+		<div class="container-fluid" style="background-color: white; ">
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a th:href="@{/categories/}">Categories List</a>
+					</li>
+				</ol>
+			</nav>
+			<div class="container-fluid" >
+
+				<div class="row">
+					<div class="col" th:each="cat : ${listCategories}">
+						<div>
+							<a class="items" th:href="@{'/categories/'+ ${cat.alias}}">
+								<b>[[${cat.name}]]</b> </a>
+						</div>
+						<br>
 					</div>
-					<br>
 				</div>
 			</div>
-
 
 		</div>
 	</div>

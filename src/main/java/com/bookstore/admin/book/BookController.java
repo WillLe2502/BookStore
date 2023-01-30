@@ -59,19 +59,28 @@ public class BookController {
 		return "books_by_category";
 	}
 
-	@GetMapping("/book/{book_name}")
+	@GetMapping("/books/{book_name}")
 	public String viewBookDetail(@PathVariable("book_name") String name, Model model) {
 		try {
 			Book book = bookService.getBook(name);
 			List<Category> listCategoryParents = categoryService.getCategoryParents(book.getCategory());
 			model.addAttribute("listCategoryParents", listCategoryParents);
 			model.addAttribute("book", book);
-			
-			
-			
-			return "book_detail";
 		} catch (BookNotFoundException e) {
 			return "error/404";
 		}
+
+		return "book_detail";
+
+	}
+
+	@GetMapping("/books")
+	public String viewBooks(Model model) {
+
+		List<Book> bookList = bookService.getAllBook();
+		model.addAttribute("bookList", bookList);
+
+		return "book_list";
+
 	}
 }
