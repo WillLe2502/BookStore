@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head(${pageTitle}, 'none')" />
+
+<body>
+<div class="container-fluid">
+	<div th:replace="navigation :: header_menu"></div>
+	<div th:replace="navigation :: search_nav"></div>
+	
+	<div th:if="${totalItems > 0}">
+		<h2>Search Results for '[[${keyword}]]'</h2>
+	</div>
+	
+	<div th:unless="${totalItems > 0}">
+		<h3>No match found for '[[${keyword}]]'</h3>
+	</div>
+	
+	<div class="row">
+		<th:block th:each="book : ${listResult}">
+			<div class="col">
+				<div>
+					<a th:href="@{'/books/' + ${book.alias}}">
+						<img th:src="@{${book.coverPath}}" style="width: 142px; height: 214px;" />
+						<br/>
+						<b>[[${book.name}]]</b>
+					</a>
+				</div>
+				<div th:if="${book.discountPercent <= 0}">
+					<span>$ [[${book.price}]]</span>
+				</div>
+				<div th:if="${book.discountPercent > 0}">
+					<span style="font-size: larger; color: darkred">$ [[${book.discountPrice}]]</span>
+					<del><span>$ [[${book.price}]]</span></del>
+				</div>
+	
+			</div>
+		</th:block>
+	</div>
+	
+	<div th:replace="fragments :: pagination('/search', 'book')"></div>
+	
+	<div th:replace="navigation :: footer_menu"></div>
+				
+</div>
+</body>
+</html>
