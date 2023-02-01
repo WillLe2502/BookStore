@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.bookstore.admin.entity.AuthenticationType;
 import com.bookstore.admin.entity.Country;
 import com.bookstore.admin.entity.Customer;
 import com.bookstore.admin.setting.CountryRepository;
@@ -58,6 +59,12 @@ public class CustomerService {
 		} else {
 			customerRepo.enable(customer.getId());
 			return true;
+		}
+	}
+	
+	public void updateAuthentication(Customer customer, AuthenticationType type) {
+		if (!customer.getAuthenticationType().equals(type)) {
+			customerRepo.updateAuthenticationType(customer.getId(), type);
 		}
 	}
 }
