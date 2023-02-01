@@ -50,15 +50,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		.rememberMe()
 			.key("1234567890_aBcDeFgHiJkLmNoPqRsTuVwXyZ")
 			.tokenValiditySeconds(14 * 24 * 60 * 60)
-		.and()
-			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+//		.and()
+//			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
 		;
 
 	}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/images/**", "/js/**", "/webjars/**");
+		web.ignoring().antMatchers("/images/**", "/js/**", "/webjars/**", "/error/**");
 	}
 	
 	@Bean
