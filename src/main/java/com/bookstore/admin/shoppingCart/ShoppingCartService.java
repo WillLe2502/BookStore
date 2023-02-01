@@ -1,17 +1,24 @@
 package com.bookstore.admin.shoppingCart;
 
+import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bookstore.admin.book.BookRepository;
 import com.bookstore.admin.entity.Book;
 import com.bookstore.admin.entity.CartItem;
 import com.bookstore.admin.entity.Customer;
 import com.bookstore.admin.exception.ShoppingCartException;
 
 @Service
+@Transactional
 public class ShoppingCartService {
 
 	@Autowired private CartItemRepository cartRepo;
+	@Autowired private BookRepository bookRepo;
 
 	public Integer addProduct(Integer bookId, Integer quantity, Customer customer) 
 			throws ShoppingCartException {
@@ -39,5 +46,20 @@ public class ShoppingCartService {
 		cartRepo.save(cartItem);
 
 		return updatedQuantity;
+	}
+	
+	public List<CartItem> listCartItems(Customer customer) {
+		return cartRepo.findByCustomer(customer);
+	}
+	
+	public float updateQuantity(Integer bookId, Integer quantity, Customer customer) {
+		cartRepo.updateQuantity(quantity, customer.getId(), bookId);
+		Book book = bookRepo.findById(bookId).get();
+		float subtotal = book.getDiscountPrice() * quantity;
+		return subtotal;
+	}
+	
+	public void removeBook(Integer bookId, Customer customer) {
+		cartRepo.deleteByCustomerAndProduct(customer.getId(), bookId);
 	}
 }
