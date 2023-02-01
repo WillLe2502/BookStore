@@ -1,0 +1,22 @@
+server:
+  port: 80
+spring:
+  datasource:
+    hikari:
+      maximum-pool-size: 2
+      minimum-idle: 1
+    password: Sophie1610
+    url: jdbc:mysql://localhost:3306/lelivredb
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+    show-sql: false
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+
