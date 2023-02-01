@@ -13,6 +13,7 @@
 		
 		<div th:if="${book.discountPercent <= 0}">
 			<span>$ [[${book.price}]]</span>
+			<div th:replace="book/book_fragment :: price_fragment(${book.price})"></div>
 		</div>
 		
 		<div th:if="${book.discountPercent > 0}">
@@ -21,6 +22,12 @@
 		</div>
 
 	</div>			
+</div>
+
+<div th:fragment="price_fragment(bookPrice)" th:remove="tag">
+	<span th:if="${CURRENCY_SYMBOL_POSITION == 'Before price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>
+	[[${#numbers.formatDecimal(bookPrice, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]
+	<span th:if="${CURRENCY_SYMBOL_POSITION == 'After price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>
 </div>
 </body>
 </html>

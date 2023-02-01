@@ -11,7 +11,7 @@
 		
 		<a th:href="@{/}" class="navbar-brand mb-0"
 			style="padding-left: 20px;"> 
-			<img th:src="@{/images/logo.jpg}"
+			<img th:src="@{${SITE_LOGO}}"
 			class="d-inline-block align-top" width="120" height="120" />
 		</a>
 		
@@ -97,7 +97,7 @@
 			
 		</nav>
 		
-		<p class="text-center m-3">LeLivre Inventory System Management - Copyright &copy; LeLivre</p>
+		<p class="text-center">[[${COPYRIGHT}]]</p>
 	</div>
 </div>
 </body>
