@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bookstore.admin.book.BookRepository;
-import com.bookstore.admin.entity.Book;
 import com.bookstore.admin.entity.CartItem;
 import com.bookstore.admin.entity.Customer;
+import com.bookstore.admin.entity.book.Book;
 import com.bookstore.admin.exception.ShoppingCartException;
 
 @Service

@@ -12,9 +12,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
-import com.bookstore.admin.entity.Book;
 import com.bookstore.admin.entity.CartItem;
 import com.bookstore.admin.entity.Customer;
+import com.bookstore.admin.entity.book.Book;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)

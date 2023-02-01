@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bookstore.admin.entity.Setting;
-import com.bookstore.admin.entity.SettingCategory;
+import com.bookstore.admin.entity.settting.Setting;
+import com.bookstore.admin.entity.settting.SettingCategory;
 
 @Service
 public class SettingService {

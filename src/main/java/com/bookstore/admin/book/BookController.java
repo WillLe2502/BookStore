@@ -5,15 +5,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.bookstore.admin.category.CategoryService;
-import com.bookstore.admin.entity.Book;
 import com.bookstore.admin.entity.Category;
+import com.bookstore.admin.entity.book.Book;
 import com.bookstore.admin.exception.BookNotFoundException;
 import com.bookstore.admin.exception.CategoryNotFoundException;
 

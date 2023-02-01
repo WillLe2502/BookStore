@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import com.bookstore.admin.entity.Book;
 import com.bookstore.admin.entity.CartItem;
 import com.bookstore.admin.entity.Customer;
+import com.bookstore.admin.entity.book.Book;
 
 public interface CartItemRepository extends CrudRepository<CartItem, Integer> {
 	public List<CartItem> findByCustomer(Customer customer);

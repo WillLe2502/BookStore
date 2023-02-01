@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import com.bookstore.admin.entity.Setting;
-import com.bookstore.admin.entity.SettingCategory;
+import com.bookstore.admin.entity.settting.Setting;
+import com.bookstore.admin.entity.settting.SettingCategory;
 
 public interface SettingRepository extends CrudRepository<Setting, String> {
 	public List<Setting> findByCategory(SettingCategory category);
