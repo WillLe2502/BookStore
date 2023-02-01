@@ -11,7 +11,7 @@
 	
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-2" th:each="cat : ${listCategories}">
+			<div class="col" th:each="cat : ${listCategories}">
 				<div><img th:src="@{${cat.imagePath}}" width="140" height ="200"/></div>
 				<div>
 					<a th:href="@{'/categories/' + ${cat.alias}}">[[${cat.name}]]</a>
