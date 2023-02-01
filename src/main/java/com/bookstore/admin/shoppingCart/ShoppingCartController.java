@@ -10,14 +10,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.bookstore.admin.Utility;
+import com.bookstore.admin.address.AddressService;
 import com.bookstore.admin.customer.CustomerService;
+import com.bookstore.admin.entity.Address;
 import com.bookstore.admin.entity.CartItem;
 import com.bookstore.admin.entity.Customer;
+import com.bookstore.admin.entity.ShippingRate;
+import com.bookstore.admin.shipping.ShippingRateService;
 
 @Controller
 public class ShoppingCartController {
 	@Autowired private CustomerService customerService;
 	@Autowired private ShoppingCartService cartService;
+	@Autowired private AddressService addressService;
+	@Autowired private ShippingRateService shipService;
 
 	@GetMapping("/cart")
 	public String viewCart(Model model, HttpServletRequest request) {
@@ -29,7 +35,20 @@ public class ShoppingCartController {
 		for (CartItem item : cartItems) {
 			estimatedTotal += item.getSubtotal();
 		}
+		
+		Address defaultAddress = addressService.getDefaultAddress(customer);
+		ShippingRate shippingRate = null;
+		boolean usePrimaryAddressAsDefault = false;
 
+		if (defaultAddress != null) {
+			shippingRate = shipService.getShippingRateForAddress(defaultAddress);
+		} else {
+			usePrimaryAddressAsDefault = true;
+			shippingRate = shipService.getShippingRateForCustomer(customer);
+		}
+
+		model.addAttribute("usePrimaryAddressAsDefault", usePrimaryAddressAsDefault);
+		model.addAttribute("shippingSupported", shippingRate != null);
 		model.addAttribute("cartItems", cartItems);
 		model.addAttribute("estimatedTotal", estimatedTotal);
 
