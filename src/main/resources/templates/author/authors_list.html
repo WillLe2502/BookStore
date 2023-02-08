@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeLeaf.org/thymeLeaf-extras-springsecurit5">
+
+<head th:replace="fragments :: page_head(${pageTitle}, 'none')" />
+
+<body style="background-color: #FF8F59; ">
+	<div class="container-fluid" style="background-color: white; ">
+		<div th:replace="navigation :: header_menu"></div>
+		<div th:replace="navigation :: search_nav"></div>
+
+		<div>
+			<hr>
+			
+			<div class="container">
+			<h4 style="color: brown; ">All Authors</h4>
+			<div class="row">&nbsp;</div>
+				<div class="row">
+					<th:block th:each="book : ${listAuthors}">
+						<div class="col">
+							<div>
+								<img th:src="@{${author.getLogoPath}}" width="150" />
+								<br />
+								<a th:href="""}"><b>[[${author.name}]]</b></a>
+							</div>
+
+						</div>
+					</th:block>
+				</div>
+
+			</div>
+
+		</div>
+		<div th:replace="navigation :: footer_menu"></div>
+	</div>
+</body>
+
+</html>

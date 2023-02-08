@@ -1,5 +1,7 @@
 package com.bookstore.admin.book;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -38,6 +40,12 @@ public class BookService {
 		Pageable pageable = PageRequest.of(pageNum - 1, SEARCH_RESULTS_PER_PAGE);
 		return repo.search(keyword, pageable);
 
+	}
+	
+	public List<Book> listAllBooks() {
+		
+
+		return repo.findAllEnabled();
 	}
 
 }

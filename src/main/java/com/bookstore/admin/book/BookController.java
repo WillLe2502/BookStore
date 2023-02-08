@@ -114,4 +114,13 @@ public class BookController {
 
 		return "book/search_result";
 	}
+	@GetMapping("/books")
+	public String viewBooks(Model model) {
+
+		List<Book> listBooks = bookService.listAllBooks();
+		model.addAttribute("listBooks", listBooks);
+
+		return "book/books_list";
+
+	}
 }
