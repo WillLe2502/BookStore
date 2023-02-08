@@ -36,8 +36,8 @@ public class CheckoutService {
 
 		for (CartItem item : cartItems) {
 			Book book = item.getBook();
-			float dimWeight = (book.getLength() * book.getWidth() * book.getHeight()) / DIM_DIVISOR;
-			float finalWeight = book.getWeight() > dimWeight ? book.getWeight() : dimWeight;
+			float dimWeight = (book.getLength()/1000 * book.getWidth()/1000 * book.getHeight()/1000) / DIM_DIVISOR;
+			float finalWeight = book.getWeight()/1000 > dimWeight ? book.getWeight()/1000 : dimWeight;
 			float shippingCost = finalWeight * item.getQuantity() * shippingRate.getRate();
 
 			item.setShippingCost(shippingCost);
