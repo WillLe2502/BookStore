@@ -26,4 +26,9 @@ public interface BookRepository extends PagingAndSortingRepository<Book, Integer
 			+ "MATCH(name, description) AGAINST (?1)", 
 			nativeQuery = true)
 	public Page<Book> search(String keyword, Pageable pageable);
+	
+	@Query("SELECT b FROM Book b WHERE b.enabled = true "
+			+ "AND b.author.id = ?1"
+			+ " ORDER BY b.name ASC")
+	public Page<Book> listByAuthor(Integer authorId, String categoryIDMatch, Pageable pageable);
 }

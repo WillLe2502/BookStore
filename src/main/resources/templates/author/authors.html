@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: page_head('LeLivre - Shop By Author', 'none')" />
+<body>
+<div class="container-fluid">
+	<div th:replace="navigation :: header_menu"></div>
+	<div th:replace="navigation :: search_nav"></div>
+	
+	<h1>Shopping by Author</h1>
+	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col" th:each="author : ${authors}">
+				<div><img th:src="@{${author.logoPath}}" width="140" height ="200"/></div>
+				<div>
+					<a th:href="@{'/authors/' + ${author.name}}">[[${author.name}]]</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div th:replace="navigation :: footer_menu"></div>
+
+	
+</div>	
+</body>
+</html>

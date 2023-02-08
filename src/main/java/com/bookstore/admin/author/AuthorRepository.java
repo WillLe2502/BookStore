@@ -11,4 +11,7 @@ import com.bookstore.admin.entity.Author;
 public interface AuthorRepository extends PagingAndSortingRepository<Author, Integer> {
 	@Query("SELECT a FROM Author a ORDER BY a.name ASC")
 	public List<Author> findAll();
+	
+	@Query("SELECT a FROM Author a WHERE a.name = ?1")
+	public Author findByName(String name);
 }

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: page_head(${pageTitle}, 'none')" />
+
+<body>
+	<div class="container-fluid">
+		<div th:replace="navigation :: header_menu"></div>
+		<div th:replace="navigation :: search_nav"></div>
+
+		<div th:replace="breadcrumb :: content"></div>
+
+		<div class="row text-center">
+			<div class="col">
+				<a th:href="@{'/authors/' + ${author.name}}">
+					<img th:src="@{${author.logoPath}}" height="100" />
+					<br />
+					<b>[[${author.name}]]</b>
+				</a>
+
+			</div>
+			<hr>
+		</div>
+		</th:block>
+	</div>
+
+	<div class="row">&nbsp;</div>
+
+	<div class="container">
+		<div class="row">
+			<th:block th:each="book : ${listBooks}">
+				<div class="col">
+					<div>
+						<a th:href="@{'/books/' + ${book.alias}}">
+							<img th:src="@{${book.coverPath}}" style="width: 142px; height: 214px;" />
+							<br />
+							<b>[[${book.name}]]</b>
+						</a>
+					</div>
+					<div th:if="${book.discountPercent <= 0}">
+						[[${book.price}]]
+						<!--<div th:replace="book/book_fragment :: price_fragment(${book.price})"></div> -->
+					</div>
+					<div th:if="${book.discountPercent > 0}">
+						<span style="font-size: larger; color: darkred">
+							[[${book.discountPrice}]]
+							<!-- <div th:replace="book/book_fragment :: price_fragment(${book.discountPrice})"></div>-->
+						</span>
+						<del>
+							<span>
+								[[${book.price}]]
+								<!--<div th:replace="book/book_fragment :: price_fragment(${book.price})"></div> -->
+							</span>
+						</del>
+					</div>
+
+				</div>
+			</th:block>
+		</div>
+	</div>
+
+	<div class="row">&nbsp;</div>
+
+	<div th:replace="fragments :: pagination('/authors/' + ${author.name}, 'book')"></div>
+
+	<div th:replace="navigation :: footer_menu"></div>
+
+
+	</div>
+</body>
+
+</html>

@@ -11,14 +11,14 @@
 		<div>
 			<hr>
 			
-			<div class="container">
-			<h4 style="color: brown; ">All Books</h4>
+			<div class="container-fluid">
+			<h1>All Books</h1>
 			<div class="row">&nbsp;</div>
 				<div class="row">
 					<th:block th:each="book : ${listBooks}">
 						<div class="col">
 							<div>
-								<img th:src="@{${book.coverPath}}" width="150" />
+								<img th:src="@{${book.coverPath}}"  width="140" height ="200" />
 								<br />
 								<a th:href="@{'/books/' + ${book.alias}}"><b>[[${book.name}]]</b></a>
 							</div>

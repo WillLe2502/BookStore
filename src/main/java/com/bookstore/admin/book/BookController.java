@@ -10,9 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.bookstore.admin.author.AuthorService;
 import com.bookstore.admin.category.CategoryService;
+import com.bookstore.admin.entity.Author;
 import com.bookstore.admin.entity.Category;
 import com.bookstore.admin.entity.book.Book;
+import com.bookstore.admin.exception.AuthorNotFoundException;
 import com.bookstore.admin.exception.BookNotFoundException;
 import com.bookstore.admin.exception.CategoryNotFoundException;
 
@@ -20,6 +23,7 @@ import com.bookstore.admin.exception.CategoryNotFoundException;
 public class BookController {
 	@Autowired private BookService bookService;
 	@Autowired private CategoryService categoryService;
+	@Autowired private AuthorService authorService;
 	
 	@GetMapping("/categories/{category_alias}")
 	public String viewCategoryFirstPage(
@@ -114,6 +118,49 @@ public class BookController {
 
 		return "book/search_result";
 	}
+	
+	@GetMapping("/authors/{author_name}")
+	public String viewAuthorFirstPage(
+			@PathVariable("author_name") String name,
+			Model model) {
+		return viewAuthorByPage(name,1,model);
+	}
+	
+	@GetMapping("/authors/{author_name}/page/{pageNum}")
+	public String viewAuthorByPage(
+			@PathVariable("author_name") String name,
+			@PathVariable("pageNum") int pageNum,
+			Model model) {
+		
+		try {
+			Author author = authorService.getAuthor(name);
+			Page<Book> pageBooks = bookService.listByAuthor(pageNum, author.getId());
+			List<Book> listBooks = pageBooks.getContent();
+
+			long startCount = (pageNum - 1) * bookService.BOOKS_PER_PAGE + 1;
+			long endCount = startCount + bookService.BOOKS_PER_PAGE - 1;
+			if (endCount > pageBooks.getTotalElements()) {
+				endCount = pageBooks.getTotalElements();
+			}
+
+
+			model.addAttribute("currentPage", pageNum);
+			model.addAttribute("totalPages", pageBooks.getTotalPages());
+			model.addAttribute("startCount", startCount);
+			model.addAttribute("endCount", endCount);
+			model.addAttribute("totalItems", pageBooks.getTotalElements());
+			model.addAttribute("pageTitle", author.getName());
+			model.addAttribute("listBooks", listBooks);
+			model.addAttribute("author", author);
+
+			return "book/books_by_author";
+		} 
+		catch (AuthorNotFoundException ex) {
+			return "error/404";
+		}
+	}
+	
+	
 	@GetMapping("/books")
 	public String viewBooks(Model model) {
 

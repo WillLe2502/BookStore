@@ -36,7 +36,7 @@
 					</span>
 				</del>
 			</div>
-			<div th:if="${book.discountPercent > 0}">
+			<!--<div th:if="${book.discountPercent > 0}">
 				Price:
 				<span style="font-size: larger; color: darkred">
 					<div th:replace="book/book_fragment :: price_fragment(${book.discountPrice})">
@@ -45,6 +45,7 @@
 				([[${#numbers.formatDecimal(book.discountPercent, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]] % off)
 			</div>
 			<div>&nbsp;</div>
+			 -->
 			
 			<div>
 				<span th:if="${book.inStock}" class="text-success"><b>In Stock</b></span>

@@ -47,5 +47,13 @@ public class BookService {
 
 		return repo.findAllEnabled();
 	}
+	
+	public Page<Book> listByAuthor(int pageNum, Integer authorId) {
+		String authorIdMatch = "-" + String.valueOf(authorId) + "-";
+		Pageable pageable = PageRequest.of(pageNum - 1, BOOKS_PER_PAGE);
+
+		return repo.listByCategory(authorId, authorIdMatch, pageable);
+
+	}
 
 }
