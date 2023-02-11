@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeLeaf.org/thymeLeaf-extras-springsecurit5">
+
+<head th:replace="fragments :: page_head(${pageTitle}, 'none')" />
+
+<body style="background-color: #FF8F59; ">
+	<div class="container-fluid" style="background-color: white; ">
+		<div th:replace="navigation :: header_menu"></div>
+		<div th:replace="navigation :: search_nav"></div>
+
+		<div>
+			<div class="container-fluid">
+			<h1>All Books</h1>
+			<div class="row">&nbsp;</div>
+				<div class="row">
+					<th:block th:each="book : ${listBooks}">
+						<div class="col">
+							<div>
+								<img th:src="@{${book.coverPath}}"  width="140" height ="200" />
+								<br />
+								<a th:href="@{'/books/' + ${book.alias}}"><b>[[${book.name}]]</b></a>
+							</div>
+							<div th:if="${book.discountPercent <= 0}">
+								<span>$ [[${book.price}]]</span>
+							</div>
+							<div th:if="${book.discountPercent > 0}">
+								<span style="font-size: larger; color: darkred">$ [[${book.discountPrice}]]</span>
+								<del><span>$ [[${book.price}]]</span></del>
+							</div>
+
+						</div>
+					</th:block>
+				</div>
+
+			</div>
+
+		</div>
+		
+		<div th:replace="fragments :: pagination('/books', 'author')"></div>
+		
+		<div th:replace="navigation :: footer_menu"></div>
+	</div>
+</body>
+
+</html>

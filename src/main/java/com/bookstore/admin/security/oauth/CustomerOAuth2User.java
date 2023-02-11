@@ -11,8 +11,9 @@ public class CustomerOAuth2User implements OAuth2User {
 	private OAuth2User oauth2User;
 	private String fullName;
 
-	public CustomerOAuth2User(OAuth2User user) {
+	public CustomerOAuth2User(OAuth2User user, String clientName) {
 		this.oauth2User = user;
+		this.clientName = clientName;
 	}
 
 	@Override
