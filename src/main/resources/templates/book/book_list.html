@@ -9,23 +9,29 @@
 		<div th:replace="navigation :: search_nav"></div>
 
 		<div>
-			<div class="container-fluid">
+			<div class="container">
 			<h1>All Books</h1>
 			<div class="row">&nbsp;</div>
 				<div class="row">
 					<th:block th:each="book : ${listBooks}">
 						<div class="col">
 							<div>
-								<img th:src="@{${book.coverPath}}"  width="140" height ="200" />
+								<img th:src="@{${book.coverPath}}"  width="180" height ="250" />
 								<br />
 								<a th:href="@{'/books/' + ${book.alias}}"><b>[[${book.name}]]</b></a>
 							</div>
 							<div th:if="${book.discountPercent <= 0}">
-								<span>$ [[${book.price}]]</span>
+								<div th:replace="book/book_fragment :: price_fragment(${book.price})"></div>
 							</div>
 							<div th:if="${book.discountPercent > 0}">
-								<span style="font-size: larger; color: darkred">$ [[${book.discountPrice}]]</span>
-								<del><span>$ [[${book.price}]]</span></del>
+								<span style="font-size: larger; color: darkred">
+									<div th:replace="book/book_fragment :: price_fragment(${book.discountPrice})"></div>
+								</span>
+								<del>
+									<span>
+										<div th:replace="book/book_fragment :: price_fragment(${book.price})"></div>
+									</span>
+								</del>
 							</div>
 
 						</div>

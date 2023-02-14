@@ -14,7 +14,6 @@ public class SettingService {
 	@Autowired private SettingRepository settingRepo;
 	@Autowired private CurrencyRepository currencyRepo;
 
-
 	public List<Setting> getGeneralSettings() {
 		return settingRepo.findByTwoCategories(SettingCategory.GENERAL, SettingCategory.CURRENCY);
 	}

@@ -23,7 +23,7 @@
 				<h2>[[${book.name}]]</h2>
 			</div>
 			<div>
-				<span>Author: [[${book.author.name}]]</span>
+				<a th:href="@{'/authors/' + ${book.author.name}}">[[${book.author.name}]]</a>
 			</div>
 			<div>
 				List Price:

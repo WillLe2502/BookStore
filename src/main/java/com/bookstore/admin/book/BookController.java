@@ -151,6 +151,7 @@ public class BookController {
 		model.addAttribute("totalItems", page.getTotalElements());
 		model.addAttribute("listBooks", listBooks);
 		model.addAttribute("moduleURL", "/books");
+		model.addAttribute("pageTitle", "Books");
 
 		return "book/book_list";
 		
